@@ -1,0 +1,15 @@
+{
+  "name": "test_app",
+  "version": "1.0.0",
+  "description": "Test App for Smart Mirror",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Vincent V",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^2.0.9",
+    "gps": "^0.4.7"
+  }
+}
