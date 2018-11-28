@@ -1,0 +1,73 @@
+
+body, html {
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+  color:white;
+  background-color: black;
+  margin:0;
+}
+
+h1 {
+  font-weight: normal;
+  font-size:6vw;
+  margin:0;
+}
+
+
+h2{
+  font-size:5vw;
+  font-weight:500;
+  margin:0;
+  text-align: left;
+}
+
+h3{
+  font-size:2vw;
+  font-weight:500;
+  margin:0;
+}
+
+p{
+  font-size:1.5vw;
+  font-weight:300;
+  margin:0;
+  line-height:1.4;
+}
+
+.flex-container {
+  position:relative;
+  display: flex;
+  height:100%;
+  width: 100%;
+  margin:0;
+  justify-content: center;
+}
+
+.weer{
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+
+i{
+font-size: 3vw;
+}
+
+
+.tijd{
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  align-items: flex-end;
+}
+
+.tijd h2{
+    text-align: right;
+}
+
+
+.bericht{
+align-self:center;
+font-size:2vw
+}
