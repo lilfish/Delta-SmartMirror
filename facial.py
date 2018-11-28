@@ -18,6 +18,11 @@ for x in fl:
         d["face_encode_{0}".format(x.rstrip())]=face_recognition.face_encodings(d["face_{0}".format(x.rstrip())])[0]
         known_face_encodings.append(d["face_encode_{0}".format(x.rstrip())])
         known_face_names.append(x.rstrip())
+    elif (os.path.isfile("./faces/scanned_photo_"+(x.rstrip())+".jpg")):
+        d["face_{0}".format(x.rstrip())]=face_recognition.load_image_file("faces/scanned_photo_"+(x.rstrip())+".jpg")
+        d["face_encode_{0}".format(x.rstrip())]=face_recognition.face_encodings(d["face_{0}".format(x.rstrip())])[0]
+        known_face_encodings.append(d["face_encode_{0}".format(x.rstrip())])
+        known_face_names.append(x.rstrip())
 
 
 # Initialize some variables
