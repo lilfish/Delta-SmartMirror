@@ -5,7 +5,7 @@ import os
 
 video_capture = cv2.VideoCapture(0)
 
-f=open("faces/all_names.txt", "r")
+f=open("./plugins/faces/all_names.txt", "r")
 fl = f.readlines()
 d={}
 
@@ -13,13 +13,13 @@ known_face_encodings = []
 known_face_names = []
 
 for x in fl:
-    if (os.path.isfile("./faces/scanned_photo_"+(x.rstrip())+".png")):
-        d["face_{0}".format(x.rstrip())]=face_recognition.load_image_file("faces/scanned_photo_"+(x.rstrip())+".png")
+    if (os.path.isfile("./plugins/faces/scanned_photo_"+(x.rstrip())+".png")):
+        d["face_{0}".format(x.rstrip())]=face_recognition.load_image_file("./plugins/faces/scanned_photo_"+(x.rstrip())+".png")
         d["face_encode_{0}".format(x.rstrip())]=face_recognition.face_encodings(d["face_{0}".format(x.rstrip())])[0]
         known_face_encodings.append(d["face_encode_{0}".format(x.rstrip())])
         known_face_names.append(x.rstrip())
-    elif (os.path.isfile("./faces/scanned_photo_"+(x.rstrip())+".jpg")):
-        d["face_{0}".format(x.rstrip())]=face_recognition.load_image_file("faces/scanned_photo_"+(x.rstrip())+".jpg")
+    elif (os.path.isfile("./plugins/faces/scanned_photo_"+(x.rstrip())+".jpg")):
+        d["face_{0}".format(x.rstrip())]=face_recognition.load_image_file("./plugins/faces/scanned_photo_"+(x.rstrip())+".jpg")
         d["face_encode_{0}".format(x.rstrip())]=face_recognition.face_encodings(d["face_{0}".format(x.rstrip())])[0]
         known_face_encodings.append(d["face_encode_{0}".format(x.rstrip())])
         known_face_names.append(x.rstrip())

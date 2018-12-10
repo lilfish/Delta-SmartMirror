@@ -5,6 +5,7 @@ body, html {
   color:white;
   background-color: black;
   margin:0;
+  overflow:hidden;
 }
 
 h1 {
@@ -47,6 +48,7 @@ p{
   position: absolute;
   top: 30px;
   left: 30px;
+  opacity: 0;
 }
 
 
@@ -60,6 +62,7 @@ font-size: 3vw;
   top: 30px;
   right: 30px;
   align-items: flex-end;
+  opacity: 0;
 }
 
 .tijd h2{
@@ -68,6 +71,17 @@ font-size: 3vw;
 
 
 .bericht{
-align-self:center;
-font-size:2vw
+position: absolute;
+bottom: 100px;
+font-size:2vw;
+opacity: 0;
+}
+
+.berich.tezien{
+  transition: 1s opacity ease-in-out;
+  opacity: 1;
+}
+
+#new_user_box{
+  opacity: 0;
 }

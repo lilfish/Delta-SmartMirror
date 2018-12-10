@@ -10,9 +10,9 @@ face_locations = face_recognition.face_locations(image)
 if not face_locations:
     print("No_face")
 else:
-    cv2.imwrite("faces/scanned_photo_" + sys.argv[1].rstrip() +'.png', image)
+    cv2.imwrite("./plugins/faces/scanned_photo_" + sys.argv[1].rstrip() +'.png', image)
 
-    f=open("faces/all_names.txt", "a+")
+    f=open("./plugins/faces/all_names.txt", "a+")
     f.write(sys.argv[1]+"\r\n")
 
     del(camera)
