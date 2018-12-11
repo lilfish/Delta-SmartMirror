@@ -1,9 +1,7 @@
 var fs = require('fs');
-var path = require('path'); 
-var first_load = true;
 
 const userAction = async () => {
-    var city = "saint petersburg"
+    var city = "eindhoven"
     const response = await fetch('http://openweathermap.org/data/2.5/weather?q='+city+'&appid=b6907d289e10d714a6e88b30761fae22');
     const myJson = await response.json(); //extract JSON from the http response
     
@@ -55,10 +53,10 @@ function change_weather(this_icon, city, description, temperature){
     document.getElementById("weather_temperature").innerHTML = temperature;
     document.getElementById("weather_description").innerHTML = description.capitalize();
     document.getElementById("weather_city").innerHTML = city.capitalize();
-    if (first_load == true){
-        document.getElementById("weer").classList.add('fadeInDown');
-        first_load = false;
-    }
+    
+    document.getElementById("weer").classList.add('fadeInDown');
+        
+    
 }
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -67,4 +65,3 @@ userAction()
 setInterval(function(){
     userAction()  
 },10000);
-  

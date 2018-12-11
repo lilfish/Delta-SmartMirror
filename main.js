@@ -14,7 +14,7 @@ global.mainWindow;
 //listen for app ready
 
 app.on('ready', function(){
-    mainWindow = new BrowserWindow({ show: false, frame: false });
+    mainWindow = new BrowserWindow({ show: false, frame: false,  backgroundColor: "#000000" });
     //load HTML into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, "./screens/mainWindow.html"),

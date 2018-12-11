@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Test App</title>
+    <title>Smart mirror</title>
     <link rel="stylesheet" href="../style/stylesheet.css">
     <link rel="stylesheet" href="../style/animate.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -9,7 +9,12 @@
 
   </head>
 <body>
-  <div class="flex-container">
+
+  
+  <div id="content" class="flex-container animated">
+    <div id="hidden_button_left"></div>
+    <div id="hidden_button_right"></div>
+
     <div class="weer animated" id="weer">
       <h2><span id="weather_temperature">21</span>&ordm;<img class="weather_icon" id="weather_icon" src="" alt="" srcset=""></h2>
       <h3 id="weather_description">Cloudy sky</h3>
@@ -34,6 +39,7 @@
   <script src="../scripts/facial_recognition_module.js"></script>
   <script src="../scripts/moment_time.js"></script>
   <script src="../scripts/weather.js"></script>
+  <script src="../scripts/navigation.js"></script>
   
 </body>
 </html>

@@ -44,7 +44,7 @@ function start_facial() {
                     SmartMirror_FaceRecognition.kill();  
                     document.getElementById("name").innerHTML = face_name[0];
                     document.getElementById("bericht").classList.add('fadeInUp');
-                    
+                    hand_gesture();
                 }
             } else {
                 known_name = face_name[0];
