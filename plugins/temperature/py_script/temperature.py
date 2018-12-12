@@ -2,6 +2,7 @@
 # Copyright (c) 2014 Adafruit Industries
 # Author: Tony DiCola
 
+import os
 import sys
 import Adafruit_DHT
 
@@ -25,3 +26,6 @@ if humidity is not None and temperature is not None:
 else:
     print('Failed to get reading. Try again!')
     sys.exit(1)
+
+# werkt dit?
+sys.stdout.flush()
