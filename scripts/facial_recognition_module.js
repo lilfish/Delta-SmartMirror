@@ -1,6 +1,7 @@
 var nodeConsole = require('console');
 var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
 const { execFile } = require('child_process');
+var remote = require('electron').remote;     
 
 
 
@@ -9,7 +10,7 @@ var known_name;
 var known_counter = 0;
 
 function start_facial() {
-    myConsole.log("started");
+    myConsole.log("facial scanner");
     var SmartMirror_FaceRecognition = execFile('python', ['./plugins/facial.py'], (error, stdout, stderr) => {
         if (error) {
                 throw error;               
@@ -44,7 +45,16 @@ function start_facial() {
                     SmartMirror_FaceRecognition.kill();  
                     document.getElementById("name").innerHTML = face_name[0];
                     document.getElementById("bericht").classList.add('fadeInUp');
-                    hand_gesture();
+                    remote.getGlobal('user').name = face_name[0];
+                    setTimeout(function(){
+                        document.getElementById("welkomtekst").classList.add('fadeOut');
+                        document.getElementById("welkomtekst").classList.add('slow');
+                        setTimeout(function(){
+                            document.getElementById("mainNavigator").classList.remove('hidden');
+                            document.getElementById("mainNavigator").classList.add('fadeIn');
+                            document.getElementById("mainNavigator").classList.add('slow');
+                        }, 2000)
+                    }, 2000)
                 }
             } else {
                 known_name = face_name[0];
@@ -55,7 +65,6 @@ function start_facial() {
 }
 
 function save_new_user() {
-    myConsole.log("started");
     var newName = document.getElementById("new_username").value;
     if (newName != ("")){
         var newFacePython = execFile('python', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
@@ -79,4 +88,13 @@ function save_new_user() {
         alert("Vul iets in als naam");
     }
 }
-start_facial()
+
+if (remote.getGlobal('user').name == null){
+    start_facial()
+} else {
+    document.getElementById("welkomtekst").classList.add('hidden');
+    document.getElementById("mainNavigator").classList.remove('hidden');
+    document.getElementById("mainNavigator").classList.add('fadeIn');
+    document.getElementById("bericht").classList.add('fadeIn');
+   
+}

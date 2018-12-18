@@ -10,7 +10,7 @@
   </head>
 <body>
 
-  
+  <!-- fake icon --><div id="topIcon"></div>
   <div id="content" class="flex-container animated">
     <div id="hidden_button_left"></div>
     <div id="hidden_button_right"></div>
@@ -27,11 +27,21 @@
     </div>
 
     <div class="bericht animated" id="bericht">
-      <h2>Good morning <span id="name"></span>!</h2>
+      <div id="welkomtekst" class="animated"><h2>Good morning <span id="name"></span>!</h2></div>
+
+      
+
       <div id="new_user_box" class="animated" >
         <input type="text" id="new_username"/>
         <button id="save_new" disabled onclick="save_new_user()">Niewe gebruikersnaam</button>
       </div>
+    </div>
+    <div id="mainNavigator" class="bottomNav main hidden animated">
+      <img src="../icons/screenIcons/SettingsIcon.svg" alt="" srcset="">
+      <img src="../icons/screenIcons/HomeIcon.svg" alt="" class="selected" srcset="">
+      <img src="../icons/screenIcons/NewsIcon.svg" alt="" srcset="">
+      <img src="../icons/screenIcons/TrainIcon.svg" alt="" srcset="">
+      <img src="../icons/screenIcons/AppsIcon.svg" alt="" srcset="">
     </div>
 
   </div>
