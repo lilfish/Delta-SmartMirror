@@ -1,12 +1,12 @@
-#Installation
+# Installation
 
-##Requirements
+## Requirements
 - Python 3.7 or higher
 - OpenCV
 - Face_Recognition + requirements
 - SpeechRecognition + requirements
 
-###Face_recognition requirements
+### Face_recognition requirements
 
 First, make sure you have dlib already installed with Python bindings.
 
@@ -15,7 +15,7 @@ After that you can use <code>pip3 install face_recognition</code> to install the
 Link for more support & the official documentation:
 https://github.com/ageitgey/face_recognition 
 
-###Speechrecognition requirements
+### Speechrecognition requirements
 Requirements
 - PyAudio 
 - PocketSphinx 
