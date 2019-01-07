@@ -11,7 +11,7 @@ var known_counter = 0;
 
 function start_facial() {
     myConsole.log("facial scanner");
-    var SmartMirror_FaceRecognition = execFile('python', ['./plugins/facial.py'], (error, stdout, stderr) => {
+    var SmartMirror_FaceRecognition = execFile('python3', ['./plugins/facial.py'], (error, stdout, stderr) => {
         if (error) {
                 throw error;               
             }
@@ -67,7 +67,7 @@ function start_facial() {
 function save_new_user() {
     var newName = document.getElementById("new_username").value;
     if (newName != ("")){
-        var newFacePython = execFile('python', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
+        var newFacePython = execFile('python3', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
             if (error) {
                 throw error;
             }
@@ -76,12 +76,13 @@ function save_new_user() {
         newFacePython.stdout.on('data',function(data){
             if (data.includes("done")){
                 document.getElementById('save_new').disabled = true;
-                start_facial()
+                start_facial();
             } else if(data.includes("No_face")){
-                alert("Ga voor de spiegel staan, over 5 seconden proberen we het opnieuw");
+                console.log('Opnieuw proberen');
+                //alert("Ga voor de spiegel staan, over 5 seconden proberen we het opnieuw");
                 setTimeout(function () {
                         save_new_user();
-                }, 5000);
+                }, 2500);
             }
         })
     } else {
