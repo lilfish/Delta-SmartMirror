@@ -2,6 +2,7 @@ var nodeConsole = require('console');
 var myConsole = new nodeConsole.Console(process.stdout, process.stderr);
 const { execFile } = require('child_process');
 var remote = require('electron').remote;     
+const {ipcRenderer} = require('electron')
 
 
 
@@ -13,10 +14,11 @@ function start_facial() {
     myConsole.log("facial scanner");
     var SmartMirror_FaceRecognition = execFile('python', ['./plugins/facial.py'], (error, stdout, stderr) => {
         if (error) {
-                throw error;               
-            }
-        })
-        SmartMirror_FaceRecognition.stdout.on('data',function(data){
+            throw error;               
+        }
+    })
+    
+    SmartMirror_FaceRecognition.stdout.on('data',function(data){
             
         var face_name = data.toString('utf8');
         
@@ -57,8 +59,11 @@ function start_facial() {
                     }, 2000)
                 }
             } else {
-                known_name = face_name[0];
-                known_counter = 0;
+                setTimeout(function(){
+                    known_name = face_name[0];
+                    ipcRenderer.send('login', face_name[0])
+                    known_counter = 0;
+                }, 500)
             }
         }
     });
@@ -91,6 +96,7 @@ function save_new_user() {
 
 if (remote.getGlobal('user').name == null){
     start_facial()
+    // ipcRenderer.send('login', 'v')
 } else {
     document.getElementById("welkomtekst").classList.add('hidden');
     document.getElementById("mainNavigator").classList.remove('hidden');

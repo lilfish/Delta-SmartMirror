@@ -3,7 +3,7 @@ import cv2
 import sys
 import os  
 
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 f=open("./plugins/faces/all_names.txt", "r")
 fl = f.readlines()
