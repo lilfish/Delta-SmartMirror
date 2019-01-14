@@ -4,7 +4,7 @@ const userAction = async () => {
     var city = "eindhoven"
     const response = await fetch('http://openweathermap.org/data/2.5/weather?q='+city+'&appid=b6907d289e10d714a6e88b30761fae22');
     const myJson = await response.json(); //extract JSON from the http response
-    
+    console.log(myJson);
     var main = myJson.weather[0].main;
     var id = myJson.weather[0].id;
     var weather_icon = myJson.weather[0].icon;

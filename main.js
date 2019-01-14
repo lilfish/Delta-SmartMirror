@@ -2,11 +2,12 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const { execFile } = require('child_process');
-const { ipcMain } = require('electron');
+const { spawn } = require('child_process');
+
 
 global.appRoot = path.resolve(__dirname);
 
-const { app, BrowserWindow, Menu} = electron;
+const { app, BrowserWindow, Menu, ipcMain} = electron;
 
 global.mainWindow;
 global.window = "mainWindow.html";
@@ -36,12 +37,37 @@ ipcMain.on('newwindow', function (e, new_window) {
         protocol:'file:',
         slashes: true,
     }));
+    mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.webContents.send('test','This is a test');
+    })
 })
 
-// ipcMain.on('login', function (e, user_name) {
+var can_hand = false;
 
-// })
+ipcMain.on('login', function (e, user_name) {
+    
+    const ls = spawn('python',  ['./plugins/hand_gesture.py']);
+    ls.stdout.on('data', (data) => {
 
+            if (data.includes("left")){
+                console.log("left");
+                can_hand = false;
+                mainWindow.webContents.send("navigation", "left");
+                
+                
+            } else if (data.includes("right")){
+                console.log("right");
+                can_hand = false;
+                mainWindow.webContents.send("navigation", "right");
+            }
+
+    });
+    
+    ls.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`);
+    });
+
+})
 
 
 const mainMenuTemplate = [
