@@ -9,11 +9,14 @@ global.appRoot = path.resolve(__dirname);
 
 const { app, BrowserWindow, Menu, ipcMain} = electron;
 
+//set a global window = mainwindow for navigation
 global.mainWindow;
 global.window = "mainWindow.html";
-//listen for app ready
+
+//no user has been logged in on startup
 global.user = {name: null};
 
+//on ready start a mainwindow using a browserwindow with a few settings- than load mainwindow.html in that browserwindow
 app.on('ready', function(){
     
     mainWindow = new BrowserWindow({ show: false, frame: false,  backgroundColor: "#000000", width: 1920, height: 1200, fullscreen: true});
@@ -28,33 +31,30 @@ app.on('ready', function(){
     
 });
 
-// Show new window if needed
+// if the IPC commmand newwindow is triggered with the new screen name as argument, Change window
 ipcMain.on('newwindow', function (e, new_window) {
     global.window = new_window;
-    console.log(new_window);
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, "./screens/"+new_window),
         protocol:'file:',
         slashes: true,
     }));
+    //when a new window is loaded the "did-finish-load" commands fires up. 
     mainWindow.webContents.on('did-finish-load', () => {
-        mainWindow.webContents.send('test','This is a test');
+        //mainWindow.webContents.send('test','This is a test');
     })
 })
 
-var can_hand = false;
-
+//if a user has been logged in, start hand gesture control 
 ipcMain.on('login', function (e, user_name) {
     
     const ls = spawn('python',  ['./plugins/hand_gesture.py']);
     ls.stdout.on('data', (data) => {
-
+            //main window is set by startup or by the IPC command "newwindow". Send this window the commannd "navigation" with the argument "left" or "right"
             if (data.includes("left")){
                 console.log("left");
                 can_hand = false;
                 mainWindow.webContents.send("navigation", "left");
-                
-                
             } else if (data.includes("right")){
                 console.log("right");
                 can_hand = false;
@@ -62,9 +62,9 @@ ipcMain.on('login', function (e, user_name) {
             }
 
     });
-    
+    //console log errors
     ls.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
+        console.log(`stderr: ${data}`);
     });
 
 })

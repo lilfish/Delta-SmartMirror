@@ -3,6 +3,7 @@ import cv2
 import sys
 import os  
 
+# open camera
 video_capture = cv2.VideoCapture(1)
 
 f=open("./plugins/faces/all_names.txt", "r")
@@ -12,6 +13,7 @@ d={}
 known_face_encodings = []
 known_face_names = []
 
+# foreach name in the all_names.txt document, get a photo in either png or jpg format.
 for x in fl:
     if (os.path.isfile("./plugins/faces/scanned_photo_"+(x.rstrip())+".png")):
         d["face_{0}".format(x.rstrip())]=face_recognition.load_image_file("./plugins/faces/scanned_photo_"+(x.rstrip())+".png")
@@ -61,6 +63,7 @@ while True:
 
             face_names.append(name)
 
+            # print and flush the data (to electron)
             print(face_names)
             sys.stdout.flush()
 

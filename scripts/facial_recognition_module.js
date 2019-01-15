@@ -5,23 +5,25 @@ var remote = require('electron').remote;
 const {ipcRenderer} = require('electron')
 
 
-
+//set counters for facial recognition
 var unknown_counter = 0;
 var known_name;
 var known_counter = 0;
 
+//function to start facial recognition
 function start_facial() {
-    myConsole.log("facial scanner");
-    var SmartMirror_FaceRecognition = execFile('python3', ['./plugins/facial.py'], (error, stdout, stderr) => {
+    //start a python script - located at plugins/facial.py
+    var SmartMirror_FaceRecognition = execFile('python', ['./plugins/facial.py'], (error, stdout, stderr) => {
         if (error) {
             throw error;               
         }
     })
     
+    //wait for the pythonscript to flush a stdout with data
     SmartMirror_FaceRecognition.stdout.on('data',function(data){
-            
-        var face_name = data.toString('utf8');
         
+        //create the variable face_name with the new data & parse it to json for easier editing in javascript
+        var face_name = data.toString('utf8');
         face_name = face_name.replace(/'/g, '"');
         face_name = JSON.parse(face_name);
             
@@ -39,7 +41,7 @@ function start_facial() {
             }
             
         } else {
-            
+            //if faces is known, show the user a welcome message and set global.user to face name
             if (face_name [0] == known_name){
                 known_counter++
                 if (known_counter > 2){
@@ -69,6 +71,7 @@ function start_facial() {
     });
 }
 
+//this function is to save a new face. This will later be changed so that the new user will be saved in electron, and not a txt file.
 function save_new_user() {
     var newName = document.getElementById("new_username").value;
     if (newName != ("")){
@@ -95,6 +98,7 @@ function save_new_user() {
     }
 }
 
+//if the page is reloaded, check if a user is logged in. If not start the face_recognition function. Else show navigation icons
 if (remote.getGlobal('user').name == null){
     start_facial()
     // ipcRenderer.send('login', 'v')

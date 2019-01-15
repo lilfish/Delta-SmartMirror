@@ -1,11 +1,6 @@
 const { execFile } = require('child_process');
 
-
-
-// var unknown_counter = 0;
-// var known_name;
-// var known_counter = 0;
-
+//read temperature function to get the temperature from the temperature sensor of the room
 function read_temperature() {
     myConsole.log("started");
     var SmartMirror_Temperature = execFile('python', ['./plugins/temperature/py_script/temperature.py'], (error, stdout, stderr) => {
