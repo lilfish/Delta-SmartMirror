@@ -43,7 +43,7 @@ function left() {
         document.getElementById('content').classList.add('fadeOutRight');
         document.getElementById('topIcon').classList.add('fadeOut');
         setTimeout(function(){ 
-            ipc.send('newwindow', new_window)
+                ipc.send('newwindow', new_window)
         }, 1000);
     }
 }

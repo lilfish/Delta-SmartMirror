@@ -16,14 +16,14 @@ global.user = {name: null};
 
 app.on('ready', function(){
     
-    mainWindow = new BrowserWindow({ show: false, frame: false,  backgroundColor: "#000000" });
+    mainWindow = new BrowserWindow({ show: false, frame: false,  backgroundColor: "#000000", width: 1920, height: 1200, fullscreen: true});
     //load HTML into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, "./screens/mainWindow.html"),
         protocol:'file:',
         slashes: true,
     }));
-    mainWindow.maximize()
+    mainWindow.maximize();
     mainWindow.show();
     
 });
@@ -68,6 +68,7 @@ ipcMain.on('login', function (e, user_name) {
     });
 
 })
+
 
 
 const mainMenuTemplate = [
