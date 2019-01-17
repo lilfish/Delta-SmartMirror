@@ -19,7 +19,7 @@ global.user = {name: null};
 //on ready start a mainwindow using a browserwindow with a few settings- than load mainwindow.html in that browserwindow
 app.on('ready', function(){
     
-    mainWindow = new BrowserWindow({ show: false, frame: false,  backgroundColor: "#000000", width: 1920, height: 1200, fullscreen: true});
+    mainWindow = new BrowserWindow({ show: false, frame: false,  backgroundColor: "#000000", width: 1200, height: 1920, fullscreen: true});
     //load HTML into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, "./screens/mainWindow.html"),
@@ -48,7 +48,7 @@ ipcMain.on('newwindow', function (e, new_window) {
 //if a user has been logged in, start hand gesture control 
 ipcMain.on('login', function (e, user_name) {
     
-    const ls = spawn('python',  ['./plugins/hand_gesture.py']);
+    const ls = spawn('python3m',  ['./plugins/hand_gesture.py']);
     ls.stdout.on('data', (data) => {
             //main window is set by startup or by the IPC command "newwindow". Send this window the commannd "navigation" with the argument "left" or "right"
             if (data.includes("left")){
@@ -69,6 +69,12 @@ ipcMain.on('login', function (e, user_name) {
 
 })
 
+//close all windows on IPC close command
+
+ipcMain.on('closeAllWindows', function (e, arg) {
+    console.log("Closed by Q command");
+    mainWindow.close();
+})
 
 
 const mainMenuTemplate = [

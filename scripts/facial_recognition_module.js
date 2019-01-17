@@ -11,17 +11,20 @@ var known_name;
 var known_counter = 0;
 
 //function to start facial recognition
+
 function start_facial() {
+    myConsole.log("FACIAL HAS STARTED LOG THIS!");
     //start a python script - located at plugins/facial.py
-    var SmartMirror_FaceRecognition = execFile('python', ['./plugins/facial.py'], (error, stdout, stderr) => {
+    var SmartMirror_FaceRecognition = execFile('python3m', ['./plugins/facial.py'], (error, stdout, stderr) => {
         if (error) {
-            throw error;               
+            throw error;
+            myConsole.log(error);               
         }
     })
     
     //wait for the pythonscript to flush a stdout with data
     SmartMirror_FaceRecognition.stdout.on('data',function(data){
-        
+        myConsole.log(data);
         //create the variable face_name with the new data & parse it to json for easier editing in javascript
         var face_name = data.toString('utf8');
         face_name = face_name.replace(/'/g, '"');
@@ -42,7 +45,7 @@ function start_facial() {
             
         } else {
             //if faces is known, show the user a welcome message and set global.user to face name
-            if (face_name [0] == known_name){
+            if (face_name[0] == known_name){
                 known_counter++
                 if (known_counter > 2){
                     known_counter = 0;
@@ -75,7 +78,7 @@ function start_facial() {
 function save_new_user() {
     var newName = document.getElementById("new_username").value;
     if (newName != ("")){
-        var newFacePython = execFile('python3', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
+        var newFacePython = execFile('python3m', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
             if (error) {
                 throw error;
             }
