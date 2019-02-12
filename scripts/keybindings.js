@@ -10,11 +10,11 @@ document.addEventListener('keydown', function(e) {
     //left arrow key
     if (e.keyCode == 37){
         e.keypress = '1';
-        ipc.send('navigation', 'left');
+        left();
     }
     //right arrow key
     if (e.keyCode == 39){
         e.keypress = '1';
-        ipc.send('navigation', 'right');
+        right();
     }
 });
