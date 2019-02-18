@@ -15,10 +15,15 @@
     "electron": "^2.0.16",
     "electron-json-storage": "^4.1.5",
     "electron-store": "^2.0.0",
+    "express": "^4.16.4",
     "gps": "^0.4.7",
     "moment": "^2.22.2"
   },
   "devDependencies": {
     "electron-rebuild": "^1.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.fhict.nl/I393504/Smart_mirror_project.git"
   }
 }

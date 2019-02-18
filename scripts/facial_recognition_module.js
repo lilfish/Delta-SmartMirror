@@ -15,7 +15,7 @@ var known_counter = 0;
 function start_facial() {
     myConsole.log("FACIAL HAS STARTED LOG THIS!");
     //start a python script - located at plugins/facial.py
-    var SmartMirror_FaceRecognition = execFile('python3m', ['./plugins/facial.py'], (error, stdout, stderr) => {
+    var SmartMirror_FaceRecognition = execFile('python', ['./plugins/facial.py'], (error, stdout, stderr) => {
         if (error) {
             throw error;
             myConsole.log(error);               
@@ -78,7 +78,7 @@ function start_facial() {
 function save_new_user() {
     var newName = document.getElementById("new_username").value;
     if (newName != ("")){
-        var newFacePython = execFile('python3m', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
+        var newFacePython = execFile('python', ['./plugins/new_face.py', newName], (error, stdout, stderr) => {
             if (error) {
                 throw error;
             }

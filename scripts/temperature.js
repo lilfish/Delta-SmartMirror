@@ -3,7 +3,7 @@ var data_received = false;
 //read temperature function to get the temperature from the temperature sensor of the room
 function read_temperature() {
     document.getElementById("huis_temp").innerHTML = "testx";
-    var smartmirror_temp = execFile('python3m', ['./plugins/temperature.py'], (error, stdout, stderr) => {
+    var smartmirror_temp = execFile('python', ['./plugins/temperature.py'], (error, stdout, stderr) => {
         if (error) {
             throw error;
             myConsole.log(error);               

@@ -1,7 +1,6 @@
 import Adafruit_DHT
 import json
 import sys 
-import time
 
 # we use sensor dht22
 sensor = Adafruit_DHT.DHT22
