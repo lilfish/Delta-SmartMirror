@@ -3,9 +3,8 @@ const url = require('url');
 const path = require('path');
 const { execFile } = require('child_process');
 const { spawn } = require('child_process');
-const express = require('express');
-const exp = express();
-const port = 3000
+
+const myExpress = require('./js/express');
 
 global.appRoot = path.resolve(__dirname);
 
@@ -30,9 +29,8 @@ app.on('ready', function(){
     }));
     mainWindow.maximize();
     mainWindow.show();
-    exp.get('/', (req, res) => res.send('Hello World!'))
-    exp.get('/test', (req, res) => res.send('Hello World! - test XD'))
-    exp.listen(port, () => console.log(`Example app listening on port ${port}!`))
+    myExpress.start_express();
+    
 });
 
 // if the IPC commmand newwindow is triggered with the new screen name as argument, Change window
